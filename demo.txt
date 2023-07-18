@@ -1,0 +1,19 @@
+0$D:/code/CodeAudit/test/test2.c$
+1#$include$$stdio.h$
+2#$include$$stdlib.h$
+3#$include$$string.h$
+4
+5$VOID$$vulnerableFunction$$($$CHAR$*$input$$)$${$
+6$CHAR$$buffer$[$10$]
+7$strcpy$$($$buffer$,$input$$)$
+8$printf$$($$"Copied string: %s\n"$,$buffer$$)$
+9$}$
+10
+11$INT$$main$$($$)$${$
+12$CHAR$$input$[$20$]
+13$printf$$($$"Enter a string: "$$)$
+14$scanf$$($$"%s"$,$input$$)$
+15$vulnerableFunction$$($$input$$)$
+16$RETURN$$0$
+17$}$
+18

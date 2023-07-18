@@ -1,0 +1,20 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	/248cffc9/
+a	D:/code/CodeAudit/test/test.c	/^int a;$/;"	v	line:4	typeref:typename:int
+add	D:/code/CodeAudit/test/test.c	/^int add(int a, int b)$/;"	f	line:6	typeref:typename:int
+add	D:/code/CodeAudit/test/test1.c	/^int add(int a, int b)$/;"	f	line:2	typeref:typename:int
+buffer	D:/code/CodeAudit/test/test2.c	/^    char buffer[10];$/;"	l	line:6	function:vulnerableFunction	typeref:typename:char[10]	file:
+input	D:/code/CodeAudit/test/test2.c	/^    char input[20];$/;"	l	line:12	function:main	typeref:typename:char[20]	file:
+main	D:/code/CodeAudit/test/test.c	/^    int main;$/;"	l	line:18	function:main	typeref:typename:int	file:
+main	D:/code/CodeAudit/test/test.c	/^int main()$/;"	f	line:16	typeref:typename:int
+main	D:/code/CodeAudit/test/test2.c	/^int main() {$/;"	f	line:11	typeref:typename:int
+plus	D:/code/CodeAudit/test/test.c	/^int plus(int c, int d)$/;"	f	line:11	typeref:typename:int
+s	D:/code/CodeAudit/test/test.c	/^    char s[10] = "hello";$/;"	l	line:20	function:main	typeref:typename:char[10]	file:
+str	D:/code/CodeAudit/test/test.c	/^    char *str = s;$/;"	l	line:21	function:main	typeref:typename:char *	file:
+sum	D:/code/CodeAudit/test/test.c	/^    int sum;$/;"	l	line:19	function:main	typeref:typename:int	file:
+vulnerableFunction	D:/code/CodeAudit/test/test2.c	/^void vulnerableFunction(char* input) {$/;"	f	line:5	typeref:typename:void

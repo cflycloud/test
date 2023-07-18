@@ -1,0 +1,215 @@
+<html><head><link rel="stylesheet" href="D:\code\CodeAudit\report\style\mystyle.css"></head><body><h1>REPORT 代码审计报告</h1>
+<blockquote>
+<p>检测时间：2023-07-18 16:42:56</p>
+</blockquote>
+<h3>PART ONE. 变量与函数列表识别输出</h3>
+<h4>1.<code>token_func</code>: 识别的函数列表</h4>
+<table>
+<thead>
+<tr>
+<th align="left">filepath</th>
+<th align="left">name</th>
+<th align="left">line</th>
+<th align="left">val_type</th>
+<th align="left">details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">D:/code/CodeAudit/test/test.c</td>
+<td align="left">add</td>
+<td align="left">line:6</td>
+<td align="left">int</td>
+<td align="left">[['a', 'line:6', 'int'], ['b', 'line:6', 'int']]</td>
+</tr>
+<tr>
+<td align="left">D:/code/CodeAudit/test/test1.c</td>
+<td align="left">add</td>
+<td align="left">line:2</td>
+<td align="left">int</td>
+<td align="left">[['a', 'line:6', 'int'], ['b', 'line:6', 'int']]</td>
+</tr>
+<tr>
+<td align="left">D:/code/CodeAudit/test/test.c</td>
+<td align="left">main</td>
+<td align="left">line:16</td>
+<td align="left">int</td>
+<td align="left">[['main', 'line:18', 'int'], ['s', 'line:20', 'char[10]'], ['str', 'line:21', 'char *'], ['sum', 'line:19', 'int']]</td>
+</tr>
+<tr>
+<td align="left">D:/code/CodeAudit/test/test2.c</td>
+<td align="left">main</td>
+<td align="left">line:11</td>
+<td align="left">int</td>
+<td align="left">[['input', 'line:12', 'char[20]']]</td>
+</tr>
+<tr>
+<td align="left">D:/code/CodeAudit/test/test.c</td>
+<td align="left">plus</td>
+<td align="left">line:11</td>
+<td align="left">int</td>
+<td align="left">[['c', 'line:11', 'int'], ['d', 'line:11', 'int']]</td>
+</tr>
+<tr>
+<td align="left">D:/code/CodeAudit/test/test2.c</td>
+<td align="left">vulnerableFunction</td>
+<td align="left">line:5</td>
+<td align="left">void</td>
+<td align="left">[['buffer', 'line:6', 'char[10]']]</td>
+</tr>
+</tbody>
+</table>
+<h4>2.<code>token_val</code>: 识别的变量列表</h4>
+<table>
+<thead>
+<tr>
+<th align="left">filepath</th>
+<th align="left">name</th>
+<th align="left">line</th>
+<th align="left">val_type</th>
+<th align="left">details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">D:/code/CodeAudit/test/test.c</td>
+<td align="left">a</td>
+<td align="left">line:4</td>
+<td align="left">int</td>
+<td align="left">[]</td>
+</tr>
+</tbody>
+</table>
+<h4>3.<code>danger</code>: 识别的风险函数列表</h4>
+<table>
+<thead>
+<tr>
+<th align="left">filepath</th>
+<th align="left">line</th>
+<th align="left">function_name</th>
+<th align="left">risk</th>
+<th align="left">solve</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">D:/code/CodeAudit/test/test.c</td>
+<td align="left">line:20</td>
+<td align="left">char</td>
+<td align="left">低危险</td>
+<td align="left">进行边界检查，使用限制长度的函数，或确保大小大于最大可能的长度</td>
+</tr>
+<tr>
+<td align="left">D:/code/CodeAudit/test/test.c</td>
+<td align="left">line:23</td>
+<td align="left">scanf</td>
+<td align="left">很危险</td>
+<td align="left">很可能被恶意攻击，对输入的格式字符串进行验证和过滤确保输入符合预期的格式和范围。可以使用正则表达式、条件语句或其他验证机制来检查输入的有效性.</td>
+</tr>
+<tr>
+<td align="left">D:/code/CodeAudit/test/test2.c</td>
+<td align="left">line:6</td>
+<td align="left">char</td>
+<td align="left">低危险</td>
+<td align="left">进行边界检查，使用限制长度的函数，或确保大小大于最大可能的长度</td>
+</tr>
+<tr>
+<td align="left">D:/code/CodeAudit/test/test2.c</td>
+<td align="left">line:7</td>
+<td align="left">strcpy</td>
+<td align="left">很危险</td>
+<td align="left">(1)如果目标字符串的长度不足以容纳源字符串的内容，strcpy 函数将会导致缓冲区溢出，覆盖其他内存区域的数据。这可能引发程序崩溃或安全漏洞，建议改为使用 strncpy指定复制的最大长度.</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">(2)如果目标字符串和源字符串指向相同的内存区域，strcpy 函数将无法正确工作，导致未定义行为。确保目标字符串和源字符串不重叠，可以使用 strcpy 的安全替代函数 strcpy_s（或 strncpy_s）来避免此问题。</td>
+</tr>
+<tr>
+<td align="left">D:/code/CodeAudit/test/test2.c</td>
+<td align="left">line:12</td>
+<td align="left">char</td>
+<td align="left">低危险</td>
+<td align="left">进行边界检查，使用限制长度的函数，或确保大小大于最大可能的长度</td>
+</tr>
+<tr>
+<td align="left">D:/code/CodeAudit/test/test2.c</td>
+<td align="left">line:14</td>
+<td align="left">scanf</td>
+<td align="left">很危险</td>
+<td align="left">在格式字符串中使用限定符来限制输入的最大长度，例如 '%Ns',防止缓冲区溢出</td>
+</tr>
+<tr>
+<td align="left">D:/code/CodeAudit/test/test.c</td>
+<td align="left">20</td>
+<td align="left">s[10]</td>
+<td align="left">可能存在数组溢出</td>
+<td align="left">1. 指定最大接收长度，确保输入不会超过s数组的大小。</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">2. 使用安全的输入函数，如 fgets 函数。fgets 函数可以指定最大接收长度，并且可以防止缓冲区溢出。</td>
+</tr>
+</tbody>
+</table>
+<h4>4.<code>invalidfunc</code>: 识别的无效函数列表</h4>
+<table>
+<thead>
+<tr>
+<th align="left">filepath</th>
+<th align="left">line</th>
+<th align="left">name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">D:/code/CodeAudit/test/test.c</td>
+<td align="left">line:11</td>
+<td align="left">plus</td>
+</tr>
+</tbody>
+</table>
+<h4>5.<code>invalidval</code>: 识别的无效变量列表</h4>
+<table>
+<thead>
+<tr>
+<th align="left">filepath</th>
+<th align="left">line</th>
+<th align="left">name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">D:/code/CodeAudit/test/test.c</td>
+<td align="left">line:18</td>
+<td align="left">main</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3>PATR TWO: PLOT统计绘图</h3>
+<h4>1.BAR 柱状统计图</h4>
+<p><center>
+                              <img src="D:/code/CodeAudit/report/images/risk_bar.png" style="zoom: 70%;" />
+                          </center></p>
+<p><center>
+                              <img src="D:/code/CodeAudit/report/images/invalid_func_bar.png" style="zoom: 70%;" />
+                          </center></p>
+<p><center>
+                              <img src="D:/code/CodeAudit/report/images/invalid_val_bar.png" style="zoom: 70%;" />
+                          </center></p>
+<h4>2.PIE 饼状统计图</h4>
+<p><center>
+                              <img src="D:/code/CodeAudit/report/images/risk_pie.png" style="zoom: 70%;" />
+                          </center></p>
+<p><center>
+                              <img src="D:/code/CodeAudit/report/images/invalid_func_pie.png" style="zoom: 70%;" />
+                          </center></p>
+<p><center>
+                              <img src="D:/code/CodeAudit/report/images/invalid_val_bar.png" style="zoom: 70%;" />
+                          </center></p></body></html>
